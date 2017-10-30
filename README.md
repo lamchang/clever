@@ -1,6 +1,7 @@
 #clever
+
 has que tu etiqueta `<select>` lusca increible!
-__________
+___
 
 **Demo**
 <a href="#">https://github.com/lamchang/clever</a>
