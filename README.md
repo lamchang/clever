@@ -13,6 +13,17 @@ clever es una clase creada con JavaScript para permitir la customización de las
 
 #### Instrucciones
 
+_Agregar clever_
+
+Si deseas tenes la aparencia por defecto de clever puedes agregar los estilos dentro de la etiqueta `<head>`:
+
+```html
+	...
+	...
+	<link href="css/clever.min.css" rel="stylesheet" type="text/css">
+</head>
+```
+
 Para utilizar *clever* es necesario colocar el archivo *clever.min.js* antes del cierre de la etiqueta `</body>` como se muestra a continuación:
 
 ```html
@@ -22,5 +33,13 @@ Para utilizar *clever* es necesario colocar el archivo *clever.min.js* antes del
 	<script src="js/clever.min.js"></script>
 	<!-- El código que invoca a la clase clever debe ir después de que este sea declarado -->
 </body>
+```
+
+_Invocar clever_
+
+Invocamos clever tal como se muestra a continuación:
+
+```js
+	var selectVehicle = new Clever( document.getElementById('selectVehicle') );
 ```
 
