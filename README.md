@@ -1,13 +1,16 @@
 #clever
+[1]: <https://https://github.com/lamchang/clever>
+_______
 
-has que tu etiqueta `<select>` lusca increible!
-___
+_has que tu etiqueta `<select>` lusca increible!_
 
-**Demo**
-<a href="#">https://github.com/lamchang/clever</a>
+####Demo
 
-**Instrucciones**
-Para utilizar *clever* es necesario colocar el archivo *clever.min.js* antes del cierre de la etiqueta `</body>` como se muestra a continuación:
+[https://https://github.com/lamchang/clever](https://https://github.com/lamchang/clever)
+
+####Instrucciones
+
+[1] Para utilizar *clever* es necesario colocar el archivo *clever.min.js* antes del cierre de la etiqueta `</body>` como se muestra a continuación:
 
 ```
 	...
@@ -15,3 +18,4 @@ Para utilizar *clever* es necesario colocar el archivo *clever.min.js* antes del
 	<script src="js/clever.min.js"></script>
 </body>
 ```
+
