@@ -1,4 +1,4 @@
-#clever
+clever
 _______
 
 [1]: <https://github.com/lamchang/clever>
