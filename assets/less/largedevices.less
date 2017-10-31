@@ -1,0 +1,75 @@
+
+// Hero
+.hero {
+    display: grid;
+    grid-template-columns: repeat(6, 16.666666666666667vw);
+    grid-column-gap: 0;
+    grid-template-rows: auto;
+    grid-template-areas:
+    "hero hero hero hero hero hero"
+    ". . title title . ."
+    ". form form form form ."
+    "footer footer footer footer footer footer";
+    width: 100vw;
+    height: 200vh;
+    background: linear-gradient(to top, rgb(54, 0, 158) -20%, rgb(255, 110, 110));
+    .transition(all, 1s, ease);
+
+    .hero__icon {
+        margin-bottom: 15px;
+    }
+
+    .hero__text {
+        font-size: 22px;
+        font-weight: 300;
+        line-height: 1.2;
+        letter-spacing: 1.2px;
+        color: white;
+        margin: 0;
+    }
+}
+
+.section__title {
+    grid-area: title;
+    text-align: center;
+}
+
+// Intro
+.intro {
+    display: grid;
+    grid-template-columns: auto 695px 695px auto;
+    grid-column-gap: 0;
+    grid-template-rows: auto;
+    grid-template-areas: ". code example .";
+    width: 100vw;
+    height: auto;
+}
+
+// Code
+.code {
+    display: grid;
+    grid-area: code;
+    padding: 40px;
+
+    pre {
+        margin: 0;
+        white-space: pre-line;
+    }
+
+    code {
+        display: block;
+        width: 100%;
+        height: auto;
+
+        span {
+            display: inline;
+        }
+    }
+}
+
+// Code
+.example {
+    display: grid;
+    grid-area: example;
+    background-color: rgb(0, 0, 0);
+}

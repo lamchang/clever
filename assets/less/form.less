@@ -1,0 +1,28 @@
+// Form
+.form {
+    display: grid;
+    grid-area: form;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 30px;
+    grid-template-rows: auto;
+}
+
+// Select
+.select-group {
+    grid-column: auto;
+}
+
+.label {
+    display: block;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #333;
+}
+
+.select-group {
+    &.alt {
+        .label {
+            color: white;
+        }
+    }
+}
