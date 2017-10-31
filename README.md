@@ -37,9 +37,20 @@ Para utilizar *clever* es necesario colocar el archivo *clever.min.js* antes del
 
 _Invocar clever_
 
+Primero asegurate de que tu `<select>` tenga la siguiente estructura:
+
+```html
+<select>
+	<option value="DeLorean">DeLorean</option>
+	<option value="MillenniumFalcon">Millennium Falcon</option>
+	<option value="Enterprise">Enterprise</option>
+</select>
+```
+
 Invocamos clever tal como se muestra a continuación:
 
 ```js
-	var selectVehicle = new Clever( document.getElementById('selectVehicle') );
+// Invocamos la clase Clever
+var selectVehicle = new Clever( document.getElementById('selectVehicle') );
 ```
 
