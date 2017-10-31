@@ -18,20 +18,20 @@ _Agregar clever_
 Si deseas tenes la aparencia por defecto de clever puedes agregar los estilos dentro de la etiqueta `<head>`:
 
 ```html
-	...
-	...
-	<link href="css/clever.min.css" rel="stylesheet" type="text/css">
+  ...
+  ...
+  <link href="css/clever.min.css" rel="stylesheet" type="text/css">
 </head>
 ```
 
 Para utilizar *clever* es necesario colocar el archivo *clever.min.js* antes del cierre de la etiqueta `</body>` como se muestra a continuación:
 
 ```html
-	...
-	...
-	<!-- Agregamos clever.min.js al documento -->
-	<script src="js/clever.min.js"></script>
-	<!-- El código que invoca a la clase clever debe ir después de que este sea declarado -->
+  ...
+  ...
+  <!-- Agregamos clever.min.js al documento -->
+  <script src="js/clever.min.js"></script>
+  <!-- El código que invoca a la clase clever debe ir después de que este sea declarado -->
 </body>
 ```
 
@@ -41,9 +41,9 @@ Primero asegurate de que tu `<select>` tenga la siguiente estructura:
 
 ```html
 <select>
-	<option value="DeLorean">DeLorean</option>
-	<option value="MillenniumFalcon">Millennium Falcon</option>
-	<option value="Enterprise">Enterprise</option>
+  <option value="DeLorean">DeLorean</option>
+  <option value="MillenniumFalcon">Millennium Falcon</option>
+  <option value="Enterprise">Enterprise</option>
 </select>
 ```
 
