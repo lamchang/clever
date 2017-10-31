@@ -19,11 +19,12 @@ Clever es una clase creada con JavaScript para permitir la customización de las
 [https://https://github.com/lamchang/clever](https://https://github.com/lamchang/clever)
 
 #### Empezar
-     -------
 
-##### Agregar clever
+Para empezar con el uso de clever siguie los siguientes pasos:
 
-Si deseas tenes la aparencia por defecto de clever puedes agregar los estilos dentro de la etiqueta `<head>`:
+##### 1. Agregar clever
+
+(Opcional) Si deseas tenes la aparencia por defecto de clever puedes agregar los estilos dentro de la etiqueta `<head>`:
 
 ```html
   ...
