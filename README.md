@@ -1,5 +1,5 @@
 clever
-_______
+-------
 
 [1]: <https://github.com/lamchang/clever>
 
@@ -56,10 +56,23 @@ var selectVehicle = new Clever( document.getElementById('selectVehicle') );
 
 y es posible modificar sus opciones:
 
+Para modificar las opciones desde el html es necesario agregar el atributo `data-clever` de la siguiente forma: `<select data-clever="{class: 'my-class', animation: false}">`, o desde JavaScript como se muestra abajo:
+
 ```js
 // Invocamos la clase Clever y modificamos sus opciones
 var selectVehicle = new Clever( document.getElementById('selectVehicle', {class: 'my-select'}) );
-
-// Modificamos las opciones despues de invocar clever
-selectVehicle.options
 ```
+
+
+#### Settings
+
+Option | Type | Default | Descripción
+------ | ---- | ------- | -----------
+class | string | '' | Permite agregar una clase con el nombre que se desee.
+data | string | 'value' | Especifica de que atributo tomara _clever_ el valor, ejemplo: `<option value="DeLorean" car="DeLorean">DeLorean</option>` para esta estructura modificamos la opción para que tome el atributo `car` de la siguiente manera `var selectVehicle = new Clever( document.getElementById('selectVehicle', {data: 'car'}) );`.
+animation | boolean | true | Activa o desactiva las animaciones por defecto.
+linked | boolean | true | Liga la estructura HTML de clever con el `<select>`.
+changePosition | boolean | true | Cambia automaticamente la posición del _dropdown_ dependiendo de la posición del scroll.
+
+
+
