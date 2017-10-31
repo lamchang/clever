@@ -7,11 +7,17 @@ _has que tu etiqueta `<select>` lusca increible!_
 
 clever es una clase creada con JavaScript para permitir la customización de las etiquetas `<select>` creando un equivalente con otras etiquetas html.
 
+#### Tabla de contenido
+1. [Demo](#demo)
+1. [Empezar](#empezar)
+1. [Invocar clever](#invocar-clever)
+1. [Settings](#settings)
+
 #### Demo
 
 [https://https://github.com/lamchang/clever](https://https://github.com/lamchang/clever)
 
-#### Instrucciones
+#### Empezar
 
 **Agregar clever**
 
