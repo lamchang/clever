@@ -25,14 +25,14 @@
                 data: 'value',
                 animation: true,
                 linked: true,
-                changePosition: true
+                dropPositionAuto: true
             };
             Object.assign(this.options, options);
 
             // If has a element & and if element is not an array...
             if( element && this.DOM.element.toString() != '[object NodeList]' && this.DOM.element.init != true ) {
                 this._build();
-                if(this.options.changePosition) this.AutoPosition();
+                if(this.options.dropPositionAuto) this.dropPositionAuto();
             // Else...
             } else {
                 // If element is an array...
@@ -53,7 +53,7 @@
             this.DOM.element.init = true;
             this.DOM.element.classList.add ('clever--hide', 'clever-initialized');
             this.DOM.element.currentOption = this.InitialOption();
-            this.DOM.element.allOptions = this.DOM.element.querySelectorAll ('option');
+            this.DOM.element.selectOptions = this.DOM.element.querySelectorAll ('option');
             var options = new Array;
 
             // Select
@@ -83,11 +83,11 @@
             this.DOM.element.dropdown.className = 'clever__dropdown';
 
             // List
-            this.DOM.element.select.list = document.createElement ('ul');
-            this.DOM.element.select.list.className =  'clever__list';
+            this.DOM.element.list = document.createElement ('ul');
+            this.DOM.element.list.className =  'clever__list';
 
             // Options
-            for ( var i = 0; i < this.DOM.element.allOptions.length; i++ )
+            for ( var i = 0; i < this.DOM.element.selectOptions.length; i++ )
             {
                 // OptionAnchor
                 var optionValue = document.createElement ('div');
@@ -99,14 +99,14 @@
                 var option = document.createElement ('li');
                     option.parent = this;
                     option.className = 'clever__option';
-                    if (this.DOM.element.allOptions[i].selected) option.classList.add ('clever--active');
-                    option.dataset.value = this.DOM.element.allOptions[i].getAttribute (this.options.data);
+                    if (this.DOM.element.selectOptions[i].selected) option.classList.add ('clever--active');
+                    option.dataset.value = this.DOM.element.selectOptions[i].getAttribute (this.options.data);
                     option.dataset.index = i;
                     option.innerHTML = '<i class="clever__icon  clever-icon-checked"></i>';
                     option.appendChild (optionValue);
 
                 // Dibujamos "option" en el DOM
-                this.DOM.element.select.list.appendChild (option);
+                this.DOM.element.list.appendChild (option);
 
                 // Agregamos "option" a arreglo "options"
                 options.push (option);
@@ -122,14 +122,14 @@
                 for ( var i = 0; i < options.length; i++ ) {
 
                     options[i].classList.remove ('clever--active');
-                    this.parent.DOM.element.allOptions[i].selected = false;
-                    this.parent.DOM.element.allOptions[i].removeAttribute ('selected');
+                    this.parent.DOM.element.selectOptions[i].selected = false;
+                    this.parent.DOM.element.selectOptions[i].removeAttribute ('selected');
 
                 }
 
                 // Agregamos "active" en "option" seleccionada
                 this.classList.add ('clever--active');
-                if(this.parent.options.linked) this.parent.DOM.element.allOptions[this.dataset.index].selected = true;
+                if(this.parent.options.linked) this.parent.DOM.element.selectOptions[this.dataset.index].selected = true;
                 this.parent.DOM.element.currentOption = this.dataset.value;
                 this.parent.DOM.element.current.innerHTML = this.querySelector('.clever__option__value').innerHTML;
                 this.parent.DOM.element.select.dataset.value = this.dataset.value;
@@ -142,7 +142,7 @@
             this.DOM.element.field.appendChild (this.DOM.element.current);
             this.DOM.element.field.appendChild (this.DOM.element.icon);
             this.DOM.element.select.appendChild (this.DOM.element.dropdown);
-            this.DOM.element.dropdown.appendChild (this.DOM.element.select.list);
+            this.DOM.element.dropdown.appendChild (this.DOM.element.list);
 
             // Events
             document.addEventListener('click', this.closeDropdown);
@@ -207,10 +207,10 @@
         }
 
         OptionValue (i) {
-            if(this.DOM.element.allOptions[i].dataset.content) {
-                return this.DOM.element.allOptions[i].dataset.content;
+            if(this.DOM.element.selectOptions[i].dataset.content) {
+                return this.DOM.element.selectOptions[i].dataset.content;
             } else {
-                return this.DOM.element.allOptions[i].innerHTML;
+                return this.DOM.element.selectOptions[i].innerHTML;
             }
         }
 
@@ -219,22 +219,24 @@
         }
 
         // Change de dropdown position
-        AutoPosition () {
+        dropPositionAuto () {
 
             // Catch event "scroll"
             window.addEventListener('scroll', function() {
+                var dropdownTop = clever.DOM.element.dropdown.getBoundingClientRect().top;
+                var dropdownBottom = dropdownTop + clever.DOM.element.list.offsetHeight;
 
                 // If window scroll is bigger or equal to select position...
-                if( window.pageYOffset > clever.DOM.element.dropdown.getBoundingClientRect().top ) {
+                if(dropdownTop < 0 || dropdownTop + (clever.DOM.element.list.offsetHeight * 2) < window.innerHeight) {
 
-                    // ...change the dropdown position
+                    // ...change the dropdown position to down
                     clever.DOM.element.dropdown.style.top = '100%';
                     clever.DOM.element.dropdown.style.bottom = 'initial';
 
                 }
-                else if(window.pageYOffset < clever.DOM.element.dropdown.getBoundingClientRect().top + clever.DropdownSize()) {
+                else if(dropdownBottom > window.innerHeight) {
 
-                    // ...change the dropdown position
+                    // ...change the dropdown position to up
                     clever.DOM.element.dropdown.style.top = 'initial';
                     clever.DOM.element.dropdown.style.bottom = '100%';
 
@@ -244,10 +246,9 @@
         }
 
         DropdownSize () {
-            var optionsCount = this.DOM.element.allOptions.length;
-            var optionHeight = this.DOM.element.select.list.querySelector('.clever__option:first-of-type').offsetHeight;
 
-            return optionsCount * optionHeight;
+
+            return ;
         }
 
     };
