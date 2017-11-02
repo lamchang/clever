@@ -48,7 +48,7 @@
         // Build
         _build () {
             this.DOM.element.init = true;
-            this.DOM.element.classList.add ('clever--hide', 'clever-initialized');
+            this.DOM.element.classList.add ('clever-element', 'clever--hide', 'clever-initialized');
             this.DOM.element.currentOption = this.InitialOption();
             this.DOM.element.selectOptions = this.DOM.element.querySelectorAll ('option');
             var options = new Array;
@@ -175,7 +175,7 @@
         }
 
         openDropdown () {
-            var selects = document.querySelectorAll ('.clever');
+            var selects = document.querySelectorAll ('.clever-element');
 
             for (var i = 0; i < selects.length; i++) {
                 if( selects[i].id != this.id ) {
@@ -186,8 +186,8 @@
 
             }
 
-            clever.DOM.element.select.classList.toggle ('clever--focus');
-            clever.DOM.element.dropdown.classList.toggle ('clever--active');
+            this.parentNode.querySelector('select').select.classList.toggle ('clever--focus');
+            this.parentNode.querySelector('select').dropdown.classList.toggle ('clever--active');
         }
 
         closeDropdown () {
@@ -217,6 +217,8 @@
 
         // Change de dropdown position
         dropPositionAuto () {
+
+            var clever = this;
 
             // Catch event "scroll"
             window.addEventListener('scroll', function() {
