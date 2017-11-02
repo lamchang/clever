@@ -11,9 +11,6 @@
 
     class Clever {
 
-
-
-
         constructor(element, options) {
 
             clever = this;
@@ -200,7 +197,7 @@
 
                 for (var i = 0; i < selects.length; i++) {
                     selects[i].classList.remove ('clever--focus');
-                    selects[i].dropdown.classList.remove ('clever--active');
+                    selects[i].querySelector('select').dropdown.classList.remove ('clever--active');
                 }
 
             }
@@ -225,9 +222,10 @@
             window.addEventListener('scroll', function() {
                 var dropdownTop = clever.DOM.element.dropdown.getBoundingClientRect().top;
                 var dropdownBottom = dropdownTop + clever.DOM.element.list.offsetHeight;
+                var dropdownSize = dropdownTop + (clever.DOM.element.list.offsetHeight * 2) + clever.DOM.element.select.offsetHeight;
 
                 // If window scroll is bigger or equal to select position...
-                if(dropdownTop < 0 || dropdownTop + (clever.DOM.element.list.offsetHeight * 2) < window.innerHeight) {
+                if(dropdownTop < 0 || dropdownSize < window.innerHeight) {
 
                     // ...change the dropdown position to down
                     clever.DOM.element.dropdown.style.top = '100%';
@@ -243,12 +241,6 @@
                 }
             });
 
-        }
-
-        DropdownSize () {
-
-
-            return ;
         }
 
     };
