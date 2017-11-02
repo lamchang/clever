@@ -92,6 +92,12 @@ body {
   z-index: 2;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 2px #006eff;
 }
+.clever.clever--focus .clever-icon-dropdown::before {
+  background-color: rgba(0, 110, 255, 0.5);
+}
+.clever.clever--focus .clever-icon-dropdown::after {
+  background-color: #006eff;
+}
 .clever__field {
   position: relative;
   display: block;
@@ -205,6 +211,11 @@ body {
   width: 10px;
   height: 2px;
   border-radius: 2px;
+  -webkit-transition: all 0.35s ease;
+  -moz-transition: all 0.35s ease;
+  -ms-transition: all 0.35s ease;
+  -o-transition: all 0.35s ease;
+  transition: all 0.35s ease;
 }
 .clever-icon-dropdown::before {
   left: 0;

@@ -51,6 +51,16 @@
     &.clever--focus {
         z-index: 2;
         box-shadow:  0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 2px rgba(0, 110, 255, 1);
+
+        .clever-icon-dropdown {
+            &::before {
+                background-color: rgba(0, 110, 255, 0.5)
+            }
+
+            &::after {
+                background-color: rgba(0, 110, 255, 1)
+            }
+        }
     }
 }
 
@@ -180,6 +190,7 @@
         width: 10px;
         height: 2px;
         border-radius: 2px;
+        .transition(all, 0.35s, ease);
     }
 
     &::before {

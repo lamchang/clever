@@ -47,10 +47,9 @@
 
         // Build
         _build () {
+            // Define init variables
             this.DOM.element.init = true;
             this.DOM.element.classList.add ('clever-element', 'clever--hide', 'clever-initialized');
-            this.DOM.element.currentOption = this.InitialOption();
-            this.DOM.element.selectOptions = this.DOM.element.querySelectorAll ('option');
             var options = new Array;
 
             // Select
@@ -58,33 +57,37 @@
             this.DOM.element.select.classList.add ('clever', 'clever-initilized');
             if(this.options.class) this.DOM.element.select.classList.add (this.options.class);
             this.DOM.element.select.id = 'CleverHal' + cleverCount;
+
+            // Define options variables
+            this.DOM.element.select.currentOption = this.initialOption();
+            this.DOM.element.select.selectOptions = this.DOM.element.querySelectorAll ('option');
             cleverCount++;
 
             // Icon
-            this.DOM.element.icon = document.createElement ('i');
-            this.DOM.element.icon.classList.add ('clever__icon', 'clever-icon-dropdown');
+            this.DOM.element.select.icon = document.createElement ('i');
+            this.DOM.element.select.icon.classList.add ('clever__icon', 'clever-icon-dropdown');
 
             // Field
-            this.DOM.element.field = document.createElement ('button');
-            this.DOM.element.field.type = 'button';
-            this.DOM.element.field.role = 'button';
-            this.DOM.element.field.className = 'clever__field';
+            this.DOM.element.select.field = document.createElement ('button');
+            this.DOM.element.select.field.type = 'button';
+            this.DOM.element.select.field.role = 'button';
+            this.DOM.element.select.field.className = 'clever__field';
 
             // Current option
-            this.DOM.element.current = document.createElement ('p');
-            this.DOM.element.current.className = 'clever__current-option';
-            this.DOM.element.current.innerHTML = this.DOM.element.currentOption;
+            this.DOM.element.select.current = document.createElement ('p');
+            this.DOM.element.select.current.className = 'clever__current-option';
+            this.DOM.element.select.current.innerHTML = this.DOM.element.select.currentOption;
 
             // Dropdown
-            this.DOM.element.dropdown = document.createElement ('div');
-            this.DOM.element.dropdown.className = 'clever__dropdown';
+            this.DOM.element.select.dropdown = document.createElement ('div');
+            this.DOM.element.select.dropdown.className = 'clever__dropdown';
 
             // List
-            this.DOM.element.list = document.createElement ('ul');
-            this.DOM.element.list.className =  'clever__list';
+            this.DOM.element.select.list = document.createElement ('ul');
+            this.DOM.element.select.list.className =  'clever__list';
 
             // Options
-            for ( var i = 0; i < this.DOM.element.selectOptions.length; i++ )
+            for ( var i = 0; i < this.DOM.element.select.selectOptions.length; i++ )
             {
                 // OptionAnchor
                 var optionValue = document.createElement ('div');
@@ -96,50 +99,50 @@
                 var option = document.createElement ('li');
                     option.parent = this;
                     option.className = 'clever__option';
-                    if (this.DOM.element.selectOptions[i].selected) option.classList.add ('clever--active');
-                    option.dataset.value = this.DOM.element.selectOptions[i].getAttribute (this.options.data);
+                    if (this.DOM.element.select.selectOptions[i].selected) option.classList.add ('clever--active');
+                    option.dataset.value = this.DOM.element.select.selectOptions[i].getAttribute (this.options.data);
                     option.dataset.index = i;
                     option.innerHTML = '<i class="clever__icon  clever-icon-checked"></i>';
                     option.appendChild (optionValue);
 
-                // Dibujamos "option" en el DOM
-                this.DOM.element.list.appendChild (option);
+                // Create "option" into DOM
+                this.DOM.element.select.list.appendChild (option);
 
-                // Agregamos "option" a arreglo "options"
+                // Add "option" into array "options"
                 options.push (option);
 
-                // Agregamos evento click a "option"
+                // Add event click to "option"
                 option.addEventListener ('click', OptionActions);
 
             }
 
 
             function OptionActions (thisDom) {
-                // Removemos "active" de todos los "option"
+                // Remove "active" from all "option"
                 for ( var i = 0; i < options.length; i++ ) {
 
                     options[i].classList.remove ('clever--active');
-                    this.parent.DOM.element.selectOptions[i].selected = false;
-                    this.parent.DOM.element.selectOptions[i].removeAttribute ('selected');
+                    this.parent.DOM.element.select.selectOptions[i].selected = false;
+                    this.parent.DOM.element.select.selectOptions[i].removeAttribute ('selected');
 
                 }
 
-                // Agregamos "active" en "option" seleccionada
+                // Add "active" into selected "option"
                 this.classList.add ('clever--active');
-                if(this.parent.options.linked) this.parent.DOM.element.selectOptions[this.dataset.index].selected = true;
-                this.parent.DOM.element.currentOption = this.dataset.value;
-                this.parent.DOM.element.current.innerHTML = this.querySelector('.clever__option__value').innerHTML;
+                if(this.parent.options.linked) this.parent.DOM.element.select.selectOptions[this.dataset.index].selected = true;
+                this.parent.DOM.element.select.currentOption = this.dataset.value;
+                this.parent.DOM.element.select.current.innerHTML = this.querySelector('.clever__option__value').innerHTML;
                 this.parent.DOM.element.select.dataset.value = this.dataset.value;
             }
 
-            // Appends
+            // Appends for DOM objects
             this.DOM.element.parentNode.insertBefore (this.DOM.element.select, this.DOM.element);
             this.DOM.element.select.appendChild (this.DOM.element);
-            this.DOM.element.select.appendChild (this.DOM.element.field);
-            this.DOM.element.field.appendChild (this.DOM.element.current);
-            this.DOM.element.field.appendChild (this.DOM.element.icon);
-            this.DOM.element.select.appendChild (this.DOM.element.dropdown);
-            this.DOM.element.dropdown.appendChild (this.DOM.element.list);
+            this.DOM.element.select.appendChild (this.DOM.element.select.field);
+            this.DOM.element.select.field.appendChild (this.DOM.element.select.current);
+            this.DOM.element.select.field.appendChild (this.DOM.element.select.icon);
+            this.DOM.element.select.appendChild (this.DOM.element.select.dropdown);
+            this.DOM.element.select.dropdown.appendChild (this.DOM.element.select.list);
 
             // Events
             document.addEventListener('click', this.closeDropdown);
@@ -147,7 +150,7 @@
 
         }
 
-        InitialOption () {
+        initialOption () {
             // If option is selected...
             if (this.DOM.element.querySelector ('option[selected]')) {
                 // If option has a "data-content"...
@@ -175,7 +178,7 @@
         }
 
         openDropdown () {
-            var selects = document.querySelectorAll ('.clever-element');
+            var selects = document.querySelectorAll ('.clever');
 
             for (var i = 0; i < selects.length; i++) {
                 if( selects[i].id != this.id ) {
@@ -186,8 +189,8 @@
 
             }
 
-            this.parentNode.querySelector('select').select.classList.toggle ('clever--focus');
-            this.parentNode.querySelector('select').dropdown.classList.toggle ('clever--active');
+            this.classList.toggle ('clever--focus');
+            this.dropdown.classList.toggle ('clever--active');
         }
 
         closeDropdown () {
@@ -197,17 +200,17 @@
 
                 for (var i = 0; i < selects.length; i++) {
                     selects[i].classList.remove ('clever--focus');
-                    selects[i].querySelector('select').dropdown.classList.remove ('clever--active');
+                    selects[i].dropdown.classList.remove ('clever--active');
                 }
 
             }
         }
 
         OptionValue (i) {
-            if(this.DOM.element.selectOptions[i].dataset.content) {
-                return this.DOM.element.selectOptions[i].dataset.content;
+            if(this.DOM.element.select.selectOptions[i].dataset.content) {
+                return this.DOM.element.select.selectOptions[i].dataset.content;
             } else {
-                return this.DOM.element.selectOptions[i].innerHTML;
+                return this.DOM.element.select.selectOptions[i].innerHTML;
             }
         }
 
@@ -222,23 +225,23 @@
 
             // Catch event "scroll"
             window.addEventListener('scroll', function() {
-                var dropdownTop = clever.DOM.element.dropdown.getBoundingClientRect().top;
-                var dropdownBottom = dropdownTop + clever.DOM.element.list.offsetHeight;
-                var dropdownSize = dropdownTop + (clever.DOM.element.list.offsetHeight * 2) + clever.DOM.element.select.offsetHeight;
+                var dropdownTop = clever.DOM.element.select.dropdown.getBoundingClientRect().top;
+                var dropdownBottom = dropdownTop + clever.DOM.element.select.list.offsetHeight;
+                var dropdownSize = dropdownTop + (clever.DOM.element.select.list.offsetHeight * 2) + clever.DOM.element.select.offsetHeight;
 
                 // If window scroll is bigger or equal to select position...
                 if(dropdownTop < 0 || dropdownSize < window.innerHeight) {
 
                     // ...change the dropdown position to down
-                    clever.DOM.element.dropdown.style.top = '100%';
-                    clever.DOM.element.dropdown.style.bottom = 'initial';
+                    clever.DOM.element.select.dropdown.style.top = '100%';
+                    clever.DOM.element.select.dropdown.style.bottom = 'initial';
 
                 }
                 else if(dropdownBottom > window.innerHeight) {
 
                     // ...change the dropdown position to up
-                    clever.DOM.element.dropdown.style.top = 'initial';
-                    clever.DOM.element.dropdown.style.bottom = '100%';
+                    clever.DOM.element.select.dropdown.style.top = 'initial';
+                    clever.DOM.element.select.dropdown.style.bottom = '100%';
 
                 }
             });
