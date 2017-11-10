@@ -141,7 +141,7 @@
                 clever.value = this.dataset.value;
                 clever.DOM.element.select.dataset.value = this.dataset.value;
 
-                // Dispatch event "chage"
+                // Dispatch event "change"
                 clever.DOM.element.dispatchEvent(triggerChange);
             }
 
