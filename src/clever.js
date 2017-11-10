@@ -7,13 +7,10 @@
 {
 
     var cleverCount = 0;
-    var clever;
 
     class Clever {
 
         constructor(element, options) {
-
-            clever = this;
 
             this.DOM = {};
             this.DOM.element = element;
@@ -24,6 +21,8 @@
                 linked: true,
                 dropPositionAuto: true
             };
+            this.value;
+
             Object.assign(this.options, options);
 
             // If has a element & and if element is not an array...
@@ -47,7 +46,12 @@
 
         // Build
         _build () {
-            // Define init variables
+            // Save "this" into variable "clever"
+            var clever = this;
+            // Create event "change" trigger
+            var triggerChange = new Event('change');
+
+            // Define DOM variables and elements
             this.DOM.element.init = true;
             this.DOM.element.classList.add ('clever-element', 'clever--hide', 'clever-initialized');
             var options = new Array;
@@ -59,6 +63,7 @@
             this.DOM.element.select.id = 'CleverHal' + cleverCount;
 
             // Define options variables
+            this.value = this.initialOption();
             this.DOM.element.select.currentOption = this.initialOption();
             this.DOM.element.select.selectOptions = this.DOM.element.querySelectorAll ('option');
             cleverCount++;
@@ -117,22 +122,27 @@
             }
 
 
-            function OptionActions (thisDom) {
+            function OptionActions () {
+
                 // Remove "active" from all "option"
                 for ( var i = 0; i < options.length; i++ ) {
 
                     options[i].classList.remove ('clever--active');
-                    this.parent.DOM.element.select.selectOptions[i].selected = false;
-                    this.parent.DOM.element.select.selectOptions[i].removeAttribute ('selected');
+                    clever.DOM.element.select.selectOptions[i].selected = false;
+                    clever.DOM.element.select.selectOptions[i].removeAttribute ('selected');
 
                 }
 
-                // Add "active" into selected "option"
+                // Add "active" in the selected "option"
                 this.classList.add ('clever--active');
-                if(this.parent.options.linked) this.parent.DOM.element.select.selectOptions[this.dataset.index].selected = true;
-                this.parent.DOM.element.select.currentOption = this.dataset.value;
-                this.parent.DOM.element.select.current.innerHTML = this.querySelector('.clever__option__value').innerHTML;
-                this.parent.DOM.element.select.dataset.value = this.dataset.value;
+                if(clever.options.linked) clever.DOM.element.select.selectOptions[this.dataset.index].selected = true;
+                clever.DOM.element.select.currentOption = this.dataset.value;
+                clever.DOM.element.select.current.innerHTML = this.querySelector('.clever__option__value').innerHTML;
+                clever.value = this.dataset.value;
+                clever.DOM.element.select.dataset.value = this.dataset.value;
+
+                // Dispatch event "chage"
+                clever.DOM.element.dispatchEvent(triggerChange);
             }
 
             // Appends for DOM objects
