@@ -38,14 +38,14 @@
                 <select id="Vehicle" class="js-clever">
                     <option value="DeLorean">DeLorean</option>
                     <option value="MillenniumFalcon">Millennium Falcon</option>
-                    <option value="MillenniumFalcon">Millennium Falcon</option>
+                    <option value="Carreta">Carreta</option>
                 </select>
             </div>
 
             <div class="select-group">
-                <label class="label" for="Vehicle2">Vehicle</label>
+                <label class="label" for="Model">Vehicle</label>
                 <!-- Clever -->
-                <select id="Vehicle2" class="js-clever-2">
+                <select id="Model" class="js-clever-model">
                     <option value="DeLorean"  data-content="<span class='clever__mark'>DeLorean</span>">DeLorean</option>
                     <option value="MillenniumFalcon">Millennium Falcon</option>
                     <option value="MillenniumFalcon">Millennium Falcon</option>
@@ -58,13 +58,44 @@
     </section>
     <!-- END: HERO -->
 
+    <!-- BEGIN: CALLBACKS -->
+    <section class="section  callbacks">
+        <div class="section__col">
+            <h4>init ()</h4>
+            <p class="js-write-beforechange"></p>
+        </div>
+        <div class="section__col">
+            <h4>focus ()</h4>
+            <p class="js-write-focus"></p>
+        </div>
+        <div class="section__col">
+            <h4>change ()</h4>
+            <p class="js-write-change"></p>
+        </div>
+    </section>
+    <!-- END: CALLBACKS -->
+
     <script src="../src/clever.js"></script>
     <script>
 
-        var cleverVehicle = new Clever(document.querySelector('.js-clever'));
+        // Declare objects
+        var selectVehicle = document.querySelector('.js-clever');
+        var selectModel = document.querySelector('.js-clever-model');
 
-        var cleverVehicle2 = new Clever(document.querySelector('.js-clever-2'));
+        var cleverVehicle = new Clever(selectVehicle);
+        var cleverModel = new Clever(selectModel);
 
+        /*selectVehicle.addEventListener('change', () => {
+            var elChange = document.querySelector('.js-write-change');
+            elChange.innerHTML = 'change';
+
+            setTimeout(function(){
+                elChange.innerHTML = '';
+            },1000);
+        });*/
+        cleverVehicle.change = function(){
+            alert(this.value);
+        };
     </script>
 </body>
 </html>

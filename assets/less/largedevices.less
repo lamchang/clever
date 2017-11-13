@@ -11,7 +11,7 @@
     ". form form form form ."
     "footer footer footer footer footer footer";
     width: 100vw;
-    height: 200vh;
+    height: 300px;
     background: linear-gradient(to top, rgb(54, 0, 158) -20%, rgb(255, 110, 110));
     .transition(all, 1s, ease);
 
@@ -45,31 +45,8 @@
     height: auto;
 }
 
-// Code
-.code {
+// Callbacks
+.callbacks {
     display: grid;
-    grid-area: code;
-    padding: 40px;
-
-    pre {
-        margin: 0;
-        white-space: pre-line;
-    }
-
-    code {
-        display: block;
-        width: 100%;
-        height: auto;
-
-        span {
-            display: inline;
-        }
-    }
-}
-
-// Code
-.example {
-    display: grid;
-    grid-area: example;
-    background-color: rgb(0, 0, 0);
+    grid-template-columns: repeat(4, 1fr);
 }

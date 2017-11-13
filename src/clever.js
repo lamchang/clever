@@ -21,7 +21,11 @@
                 linked: true,
                 dropPositionAuto: true
             };
-            this.value;
+
+            // Callbacks
+            this.init = ()=>{};
+            this.focus = ()=>{};
+            this.change = ()=>{};
 
             Object.assign(this.options, options);
 
@@ -63,8 +67,9 @@
             this.DOM.element.select.id = 'CleverHal' + cleverCount;
 
             // Define options variables
-            this.value = this.initialOption();
-            this.DOM.element.select.currentOption = this.initialOption();
+            this.value = this.initialOption().value;
+            this.index = this.initialOption().index;
+            this.DOM.element.select.currentOption = this.initialOption().value;
             this.DOM.element.select.selectOptions = this.DOM.element.querySelectorAll ('option');
             cleverCount++;
 
@@ -90,7 +95,6 @@
             // List
             this.DOM.element.select.list = document.createElement ('ul');
             this.DOM.element.select.list.className =  'clever__list';
-
             // Options
             for ( var i = 0; i < this.DOM.element.select.selectOptions.length; i++ )
             {
@@ -106,7 +110,7 @@
                     option.className = 'clever__option';
                     if (this.DOM.element.select.selectOptions[i].selected) option.classList.add ('clever--active');
                     option.dataset.value = this.DOM.element.select.selectOptions[i].getAttribute (this.options.data);
-                    option.dataset.index = i;
+                    option.dataset.cleverIndex = i;
                     option.innerHTML = '<i class="clever__icon  clever-icon-checked"></i>';
                     option.appendChild (optionValue);
 
@@ -123,6 +127,7 @@
 
 
             function OptionActions () {
+                var currentIndex = clever.index;
 
                 // Remove "active" from all "option"
                 for ( var i = 0; i < options.length; i++ ) {
@@ -135,14 +140,22 @@
 
                 // Add "active" in the selected "option"
                 this.classList.add ('clever--active');
-                if(clever.options.linked) clever.DOM.element.select.selectOptions[this.dataset.index].selected = true;
+                // If options "linked" is equal true select the option from <select> tag...
+                if(clever.options.linked) clever.DOM.element.select.selectOptions[this.dataset.cleverIndex].selected = true;
                 clever.DOM.element.select.currentOption = this.dataset.value;
                 clever.DOM.element.select.current.innerHTML = this.querySelector('.clever__option__value').innerHTML;
-                clever.value = this.dataset.value;
                 clever.DOM.element.select.dataset.value = this.dataset.value;
+                // Change class values
+                clever.value = this.dataset.value;
+                clever.index = this.dataset.cleverIndex;
 
-                // Dispatch event "change"
-                clever.DOM.element.dispatchEvent(triggerChange);
+                // If selected option is diferent to current option...
+                if(this.dataset.cleverIndex != currentIndex) {
+                    // ...dispatch event "change"
+                    clever.DOM.element.dispatchEvent(triggerChange);
+                    // ...invoke callback change()
+                    clever.change();
+                }
             }
 
             // Appends for DOM objects
@@ -166,10 +179,16 @@
                 // If option has a "data-content"...
                 if (this.DOM.element.querySelector ('option[selected]').dataset.content) {
                     // ..return "dataset-content"
-                    return this.DOM.element.querySelector ('option[selected]').dataset.content;
+                    return {
+                        'value': this.DOM.element.querySelector ('option[selected]').dataset.content,
+                        'index': this.DOM.element.querySelector ('option[selected]').index,
+                    };
                 } else {
                     // ..return "option.options.data"
-                    return this.DOM.element.querySelector ('option[selected]').getAttribute (this.options.data);
+                    return {
+                        'value': this.DOM.element.querySelector ('option[selected]').getAttribute (this.options.data),
+                        'index': this.DOM.element.querySelector ('option[selected]').index
+                    };
                 }
             }
             // else...
@@ -179,10 +198,16 @@
                 // If option has a "data-content"...
                 if(opt[0].dataset.content) {
                     // ..return first "option.options.data"
-                    return opt[0].dataset.content;
+                    return {
+                        'value': opt[0].dataset.content,
+                        'index': opt[0].index
+                    };
                 } else {
                     // ..return first "option.options.data"
-                    return opt[0].getAttribute (this.options.data);
+                    return {
+                        'value': opt[0].getAttribute (this.options.data),
+                        'index': opt[0].index
+                    };
                 }
             }
         }
