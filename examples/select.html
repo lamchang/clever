@@ -62,7 +62,7 @@
     <section class="section  callbacks">
         <div class="section__col">
             <h4>init ()</h4>
-            <p class="js-write-beforechange"></p>
+            <p class="js-write-init"></p>
         </div>
         <div class="section__col">
             <h4>focus ()</h4>
@@ -82,20 +82,53 @@
         var selectVehicle = document.querySelector('.js-clever');
         var selectModel = document.querySelector('.js-clever-model');
 
-        var cleverVehicle = new Clever(selectVehicle);
+        // Declare new Clever
+        var cleverVehicle = new Clever(selectVehicle, {
+            // Clever init()
+            cleverInit: function() {
+                var elInit = document.querySelector('.js-write-init');
+                    elInit.innerHTML = 'Init';
+
+                console.log(selectVehicle.value);
+            },
+            // Clever focus()
+            cleverFocus: function() {
+                var elFocus = document.querySelector('.js-write-focus');
+
+                console.log(this);
+                if(this.focus === true) {
+                    elFocus.innerHTML = 'Focus';
+                } else {
+                    var elFocus = document.querySelector('.js-write-focus');
+                    elFocus.innerHTML = '';
+                }
+               
+            },
+            // Clever focus()
+            cleverChange: function(el) {
+                var elChange = document.querySelector('.js-write-change');
+                elChange.innerHTML = 'change';
+
+                console.log();
+
+                setTimeout(function(){
+                    elChange.innerHTML = '';
+                },1000);
+            }
+
+        });
+
         var cleverModel = new Clever(selectModel);
 
-        /*selectVehicle.addEventListener('change', () => {
+        // Clever change()
+        /*cleverVehicle.change = function() {
             var elChange = document.querySelector('.js-write-change');
-            elChange.innerHTML = 'change';
+                elChange.innerHTML = 'change';
 
             setTimeout(function(){
                 elChange.innerHTML = '';
             },1000);
-        });*/
-        cleverVehicle.change = function(){
-            alert(this.value);
-        };
+        };*/
     </script>
 </body>
 </html>
