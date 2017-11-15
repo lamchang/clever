@@ -89,31 +89,30 @@
                 var elInit = document.querySelector('.js-write-init');
                     elInit.innerHTML = 'Init';
 
-                console.log(selectVehicle.value);
+                //console.log(this.clever);
             },
             // Clever focus()
             cleverFocus: function() {
                 var elFocus = document.querySelector('.js-write-focus');
 
-                console.log(this);
-                if(this.focus === true) {
+                if(this.clever.focus === true) {
                     elFocus.innerHTML = 'Focus';
                 } else {
-                    var elFocus = document.querySelector('.js-write-focus');
                     elFocus.innerHTML = '';
                 }
-               
+
+                //console.log(this);
             },
             // Clever focus()
             cleverChange: function(el) {
                 var elChange = document.querySelector('.js-write-change');
-                elChange.innerHTML = 'change';
-
-                console.log();
+                    elChange.innerHTML = 'change';
 
                 setTimeout(function(){
                     elChange.innerHTML = '';
                 },1000);
+
+                //console.log();
             }
 
         });

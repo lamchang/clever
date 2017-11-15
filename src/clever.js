@@ -16,8 +16,9 @@
             this.DOM = {};
             this.DOM.element = element;
             this.options = {
+                id: null,
                 class: null,
-                data: 'value',
+                getData: 'value',
                 animation: true,
                 linked: true,
                 dropPositionAuto: true,
@@ -26,6 +27,7 @@
                 cleverFocus: ()=>{},
                 cleverChange: ()=>{}
             };
+            this.options.clever = this;
 
             Object.assign(this.options, options);
             this._init(element);
@@ -68,7 +70,7 @@
             this.DOM.element.select = document.createElement ('div');
             this.DOM.element.select.classList.add ('clever', 'clever-initilized');
             if(this.options.class) this.DOM.element.select.classList.add (this.options.class);
-            this.DOM.element.select.id = 'CleverHal' + cleverCount;
+            this.DOM.element.select.id = this.options.id;
             this.DOM.element.select.clever = this;
 
             // Define options variables
@@ -114,7 +116,7 @@
                     option.parent = this;
                     option.className = 'clever__option';
                     if (this.DOM.element.select.selectOptions[i].selected) option.classList.add ('clever--active');
-                    option.dataset.value = this.DOM.element.select.selectOptions[i].getAttribute (this.options.data);
+                    option.dataset.value = this.DOM.element.select.selectOptions[i].getAttribute (this.options.getData);
                     option.dataset.cleverIndex = i;
                     option.innerHTML = '<i class="clever__icon  clever-icon-checked"></i>';
                     option.appendChild (optionValue);
@@ -173,7 +175,9 @@
             this.DOM.element.select.dropdown.appendChild (this.DOM.element.select.list);
 
             // Events
-            document.addEventListener('click', this.closeDropdown);
+            document.addEventListener('click', function() {
+                clever.closeDropdown();
+            });
             this.DOM.element.select.addEventListener ('click', this.openDropdown);
 
         }
@@ -189,9 +193,9 @@
                         'index': this.DOM.element.querySelector ('option[selected]').index,
                     };
                 } else {
-                    // ..return "option.options.data"
+                    // ..return "option.options.getData"
                     return {
-                        'value': this.DOM.element.querySelector ('option[selected]').getAttribute (this.options.data),
+                        'value': this.DOM.element.querySelector ('option[selected]').getAttribute (this.options.getData),
                         'index': this.DOM.element.querySelector ('option[selected]').index
                     };
                 }
@@ -202,15 +206,15 @@
                     opt[0].selected = true;
                 // If option has a "data-content"...
                 if(opt[0].dataset.content) {
-                    // ..return first "option.options.data"
+                    // ..return first "option.options.getData"
                     return {
                         'value': opt[0].dataset.content,
                         'index': opt[0].index
                     };
                 } else {
-                    // ..return first "option.options.data"
+                    // ..return first "option.options.getData"
                     return {
-                        'value': opt[0].getAttribute (this.options.data),
+                        'value': opt[0].getAttribute (this.options.getData),
                         'index': opt[0].index
                     };
                 }
@@ -242,7 +246,10 @@
         }
 
         closeDropdown () {
+            console.log(event.target);
+
             if (event.target.closest('.clever') == null) {
+                console.log(event.type);
 
                 var selects = document.querySelectorAll ('.clever');
 
@@ -250,6 +257,13 @@
                     selects[i].classList.remove ('clever--focus');
                     selects[i].dropdown.classList.remove ('clever--active');
                 }
+
+                // Changes focus value to false
+                this.focus = false;
+                // Invoke "cleverFocus()" method
+                this.options.cleverFocus();
+
+            } else {
 
             }
         }
