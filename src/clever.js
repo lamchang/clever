@@ -27,7 +27,6 @@
                 cleverFocus: ()=>{},
                 cleverChange: ()=>{}
             };
-            this.options.clever = this;
 
             Object.assign(this.options, options);
             this._init(element);
@@ -37,7 +36,7 @@
             // If has a element & and if element is not an array...
             if( element && this.DOM.element.toString() != '[object NodeList]' && this.DOM.element.init != true ) {
                 this._build();
-                this.options.cleverInit();
+                this.options.cleverInit.call(this);
                 if(this.options.dropPositionAuto) this.dropPositionAuto();
             // Else...
             } else {
@@ -60,7 +59,7 @@
             var clever = this;
             // Create event "change" trigger
             var triggerChange = new Event('change');
-
+            this.id = 'Clever' + cleverCount;
             // Define DOM variables and elements
             this.DOM.element.init = true;
             this.DOM.element.classList.add ('clever-element', 'clever--hide', 'clever-initialized');
@@ -161,7 +160,7 @@
                     // ...dispatch event "change"
                     clever.DOM.element.dispatchEvent(triggerChange);
                     // ...invoke callback change()
-                    clever.options.cleverChange();
+                    clever.options.cleverChange.call(clever);
                 }
             }
 
@@ -176,9 +175,11 @@
 
             // Events
             document.addEventListener('click', function() {
-                clever.closeDropdown();
+                clever.closeDropdown.call(clever);
             });
-            this.DOM.element.select.addEventListener ('click', this.openDropdown);
+            this.DOM.element.select.addEventListener ('click', function() {
+                clever.openDropdown.call(clever);
+            });
 
         }
 
@@ -225,31 +226,26 @@
             var selects = document.querySelectorAll ('.clever');
 
             for (var i = 0; i < selects.length; i++) {
-                if( selects[i].id != this.id ) {
-
+                if( selects[i].clever.id != this.id ) {
                     selects[i].classList.remove ('clever--focus');
                     selects[i].dropdown.classList.remove ('clever--active');
                 }
-
             }
 
-            this.classList.toggle ('clever--focus');
-            this.dropdown.classList.toggle ('clever--active');
+            this.DOM.element.select.classList.toggle ('clever--focus');
+            this.DOM.element.select.dropdown.classList.toggle ('clever--active');
 
-            if(this.classList.contains('clever--focus')) {
-                this.clever.focus = true;
-                this.clever.options.cleverFocus();
+            if(this.DOM.element.select.classList.contains('clever--focus')) {
+                this.focus = true;
+                this.options.cleverFocus.call(this);
             } else {
-                this.clever.focus = false;
-                this.clever.options.cleverFocus();
+                this.focus = false;
+                this.options.cleverFocus.call(this);
             }
         }
 
         closeDropdown () {
-            console.log(event.target);
-
             if (event.target.closest('.clever') == null) {
-                console.log(event.type);
 
                 var selects = document.querySelectorAll ('.clever');
 
@@ -261,7 +257,7 @@
                 // Changes focus value to false
                 this.focus = false;
                 // Invoke "cleverFocus()" method
-                this.options.cleverFocus();
+                this.options.cleverFocus.call(this);
 
             } else {
 

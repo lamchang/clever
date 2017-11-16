@@ -88,14 +88,13 @@
             cleverInit: function() {
                 var elInit = document.querySelector('.js-write-init');
                     elInit.innerHTML = 'Init';
-
-                //console.log(this.clever);
+                //console.log(this);
             },
             // Clever focus()
             cleverFocus: function() {
                 var elFocus = document.querySelector('.js-write-focus');
 
-                if(this.clever.focus === true) {
+                if(this.focus === true) {
                     elFocus.innerHTML = 'Focus';
                 } else {
                     elFocus.innerHTML = '';
