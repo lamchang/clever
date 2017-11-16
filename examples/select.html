@@ -35,7 +35,7 @@
             <div class="select-group">
                 <label class="label" for="Vehicle">Vehicle</label>
                 <!-- Clever -->
-                <select id="Vehicle" class="js-clever">
+                <select id="Vehicle" class="js-clever" data-clever='{class: "HolaMundo"}'>
                     <option value="DeLorean">DeLorean</option>
                     <option value="MillenniumFalcon">Millennium Falcon</option>
                     <option value="Carreta">Carreta</option>
@@ -75,6 +75,10 @@
     </section>
     <!-- END: CALLBACKS -->
 
+    <!-- BEGIN: LIGHTBOX -->
+    <section class="lightbox"></section>
+    <!-- END: LIGHTBOX -->
+
     <script src="../src/clever.js"></script>
     <script>
 
@@ -87,33 +91,31 @@
             // Clever init()
             cleverInit: function() {
                 var elInit = document.querySelector('.js-write-init');
-                    elInit.innerHTML = 'Init';
-                //console.log(this);
+                    elInit.innerHTML = 'Init: ' + this.id + ', value: ' + this.value;
+
+                console.log(this.dataOptions.class);
             },
+
             // Clever focus()
             cleverFocus: function() {
                 var elFocus = document.querySelector('.js-write-focus');
 
                 if(this.focus === true) {
-                    elFocus.innerHTML = 'Focus';
+                    elFocus.innerHTML = 'Focus: ' + this.id + ', value: ' + this.value;
                 } else {
                     elFocus.innerHTML = '';
                 }
-
-                //console.log(this);
             },
+
             // Clever focus()
             cleverChange: function(el) {
                 var elChange = document.querySelector('.js-write-change');
-                    elChange.innerHTML = 'change';
+                    elChange.innerHTML = 'change' + this.id + ', value: ' + this.value;
 
                 setTimeout(function(){
                     elChange.innerHTML = '';
                 },1000);
-
-                //console.log();
             }
-
         });
 
         var cleverModel = new Clever(selectModel);

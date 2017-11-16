@@ -15,6 +15,7 @@
             this.focus = false;
             this.DOM = {};
             this.DOM.element = element;
+            this.dataOptions = this.DOM.element.dataset.clever;
             this.options = {
                 id: null,
                 class: null,
@@ -23,6 +24,7 @@
                 linked: true,
                 dropPositionAuto: true,
                 // Methods
+                appendTo: null,
                 cleverInit: ()=>{},
                 cleverFocus: ()=>{},
                 cleverChange: ()=>{}
@@ -32,6 +34,7 @@
             this._init(element);
         }
 
+        // Init
         _init (element) {
             // If has a element & and if element is not an array...
             if( element && this.DOM.element.toString() != '[object NodeList]' && this.DOM.element.init != true ) {
@@ -170,15 +173,29 @@
             this.DOM.element.select.appendChild (this.DOM.element.select.field);
             this.DOM.element.select.field.appendChild (this.DOM.element.select.current);
             this.DOM.element.select.field.appendChild (this.DOM.element.select.icon);
-            this.DOM.element.select.appendChild (this.DOM.element.select.dropdown);
+
+            // If "appendTo" is equal to "null"...
+            if(this.options.appendTo == null) {
+                // ...append "dropdown" into "select"
+                this.DOM.element.select.appendChild (this.DOM.element.select.dropdown);
+            }
+            // ...else...
+            else
+            {
+                // ...append "dropdown" into "appendTo"
+                this.options.appendTo.appendChild (this.DOM.element.select.dropdown);
+            }
+            
+
             this.DOM.element.select.dropdown.appendChild (this.DOM.element.select.list);
 
-            // Events
+            // Event for close dropdown
             document.addEventListener('click', function() {
                 clever.closeDropdown.call(clever);
             });
+            // Event for toggle dropdown
             this.DOM.element.select.addEventListener ('click', function() {
-                clever.openDropdown.call(clever);
+                clever.toggleDropdown.call(clever);
             });
 
         }
@@ -222,7 +239,7 @@
             }
         }
 
-        openDropdown () {
+        toggleDropdown () {
             var selects = document.querySelectorAll ('.clever');
 
             for (var i = 0; i < selects.length; i++) {
