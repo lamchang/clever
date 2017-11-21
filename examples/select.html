@@ -35,7 +35,7 @@
             <div class="select-group">
                 <label class="label" for="Vehicle">Vehicle</label>
                 <!-- Clever -->
-                <select id="Vehicle" class="js-clever" data-clever='{class: "HolaMundo"}'>
+                <select id="Vehicle" class="js-clever">
                     <option value="DeLorean">DeLorean</option>
                     <option value="MillenniumFalcon">Millennium Falcon</option>
                     <option value="Carreta">Carreta</option>
@@ -45,7 +45,7 @@
             <div class="select-group">
                 <label class="label" for="Model">Vehicle</label>
                 <!-- Clever -->
-                <select id="Model" class="js-clever-model">
+                <select id="Model" class="js-clever-model" data-clever='{class: "HolaMundo"}'>
                     <option value="DeLorean"  data-content="<span class='clever__mark'>DeLorean</span>">DeLorean</option>
                     <option value="MillenniumFalcon">Millennium Falcon</option>
                     <option value="MillenniumFalcon">Millennium Falcon</option>
@@ -89,15 +89,13 @@
         // Declare new Clever
         var cleverVehicle = new Clever(selectVehicle, {
             // Clever init()
-            cleverInit: function() {
+            onInit: function() {
                 var elInit = document.querySelector('.js-write-init');
                     elInit.innerHTML = 'Init: ' + this.id + ', value: ' + this.value;
-
-                console.log(this.dataOptions.class);
             },
 
             // Clever focus()
-            cleverFocus: function() {
+            onFocus: function() {
                 var elFocus = document.querySelector('.js-write-focus');
 
                 if(this.focus === true) {
@@ -108,7 +106,7 @@
             },
 
             // Clever focus()
-            cleverChange: function(el) {
+            onChange: function(el) {
                 var elChange = document.querySelector('.js-write-change');
                     elChange.innerHTML = 'change' + this.id + ', value: ' + this.value;
 

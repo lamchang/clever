@@ -15,7 +15,6 @@
             this.focus = false;
             this.DOM = {};
             this.DOM.element = element;
-            this.dataOptions = this.DOM.element.dataset.clever;
             this.options = {
                 id: null,
                 class: null,
@@ -25,9 +24,9 @@
                 dropPositionAuto: true,
                 // Methods
                 appendTo: null,
-                cleverInit: ()=>{},
-                cleverFocus: ()=>{},
-                cleverChange: ()=>{}
+                onInit: ()=>{},
+                onFocus: ()=>{},
+                onChange: ()=>{}
             };
 
             Object.assign(this.options, options);
@@ -36,10 +35,14 @@
 
         // Init
         _init (element) {
+            var arrayClever =[]; 
+            arrayClever.push(this.DOM.element.dataset.clever);
+            console.log(arrayClever);
+
             // If has a element & and if element is not an array...
             if( element && this.DOM.element.toString() != '[object NodeList]' && this.DOM.element.init != true ) {
                 this._build();
-                this.options.cleverInit.call(this);
+                this.options.onInit.call(this);
                 if(this.options.dropPositionAuto) this.dropPositionAuto();
             // Else...
             } else {
@@ -163,7 +166,7 @@
                     // ...dispatch event "change"
                     clever.DOM.element.dispatchEvent(triggerChange);
                     // ...invoke callback change()
-                    clever.options.cleverChange.call(clever);
+                    clever.options.onChange.call(clever);
                 }
             }
 
@@ -254,10 +257,10 @@
 
             if(this.DOM.element.select.classList.contains('clever--focus')) {
                 this.focus = true;
-                this.options.cleverFocus.call(this);
+                this.options.onFocus.call(this);
             } else {
                 this.focus = false;
-                this.options.cleverFocus.call(this);
+                this.options.onFocus.call(this);
             }
         }
 
@@ -273,8 +276,8 @@
 
                 // Changes focus value to false
                 this.focus = false;
-                // Invoke "cleverFocus()" method
-                this.options.cleverFocus.call(this);
+                // Invoke "onFocus()" method
+                this.options.onFocus.call(this);
 
             } else {
 
