@@ -35,9 +35,13 @@
 
         // Init
         _init (element) {
-            var arrayClever =[]; 
-            arrayClever.push(this.DOM.element.dataset.clever);
-            console.log(arrayClever);
+
+            if(this.DOM.element.dataset.clever) {
+                var arrayClever = "{text: 'First Option',value: 'Hola'}";
+
+                console.log(eval(arrayClever));
+            }
+
 
             // If has a element & and if element is not an array...
             if( element && this.DOM.element.toString() != '[object NodeList]' && this.DOM.element.init != true ) {
@@ -188,7 +192,7 @@
                 // ...append "dropdown" into "appendTo"
                 this.options.appendTo.appendChild (this.DOM.element.select.dropdown);
             }
-            
+
 
             this.DOM.element.select.dropdown.appendChild (this.DOM.element.select.list);
 
