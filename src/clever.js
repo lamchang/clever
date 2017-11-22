@@ -10,7 +10,7 @@
 
     class Clever {
 
-        constructor(element, options) {
+        constructor(element, settings) {
 
             this.focus = false;
             this.DOM = {};
@@ -29,19 +29,19 @@
                 onChange: ()=>{}
             };
 
-            Object.assign(this.options, options);
+            // If element has "data-clever"...
+            if(this.DOM.element.dataset.clever) {
+                // ...assign "data-clever".
+                Object.assign(this.options, eval( '(' + this.DOM.element.dataset.clever + ')'));
+            }
+            
+            Object.assign(this.options, settings);
+                        
             this._init(element);
         }
 
         // Init
         _init (element) {
-
-            if(this.DOM.element.dataset.clever) {
-                var arrayClever = "{text: 'First Option',value: 'Hola'}";
-
-                console.log(eval(arrayClever));
-            }
-
 
             // If has a element & and if element is not an array...
             if( element && this.DOM.element.toString() != '[object NodeList]' && this.DOM.element.init != true ) {
@@ -294,10 +294,6 @@
             } else {
                 return this.DOM.element.select.selectOptions[i].innerHTML;
             }
-        }
-
-        CheckValue (element) {
-            console.log(element.value);
         }
 
         // Change de dropdown position
