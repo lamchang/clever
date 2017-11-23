@@ -326,6 +326,17 @@
 
         }
 
+        // Destroy class instance
+        destroy () {
+            this.DOM.element.init = false;
+            // Move select
+            this.DOM.element.select.parentNode.insertBefore(this.DOM.element, this.DOM.element.select);
+            // Remove clever classes
+            this.DOM.element.classList.remove('clever-element', 'clever--hide', 'clever-initialized');
+            // Delete select instance
+            this.DOM.element.select.parentNode.removeChild(this.DOM.element.select);
+        } 
+
     };
 
     window.Clever = Clever;
