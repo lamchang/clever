@@ -22,7 +22,7 @@ Clever es una clase creada con JavaScript para permitir la customización de las
 
 Para empezar con el uso de clever siguie los siguientes pasos:
 
-##### 1. Agregar clever
+##### Incluir clever
 
 (Opcional) Si deseas tenes la aparencia por defecto de clever puedes agregar los estilos dentro de la etiqueta `<head>`:
 
@@ -44,12 +44,12 @@ Para utilizar *clever* es necesario colocar el archivo *clever.min.js* antes del
 </body>
 ```
 
-##### Invocar clever
+##### Instanciar clever
 
 Primero asegurate de que tu `<select>` tenga la siguiente estructura:
 
 ```html
-<select>
+<select id="SelectVehicle">
   <option value="DeLorean">DeLorean</option>
   <option value="MillenniumFalcon">Millennium Falcon</option>
   <option value="Enterprise">Enterprise</option>
@@ -59,7 +59,7 @@ Primero asegurate de que tu `<select>` tenga la siguiente estructura:
 Invocamos clever tal como se muestra a continuación:
 
 ```js
-// Invocamos la clase Clever
+// Se crea una instacia de la clase Clever
 var selectVehicle = new Clever( document.getElementById('selectVehicle') );
 ```
 
@@ -68,7 +68,7 @@ y es posible modificar sus opciones:
 Para modificar las opciones desde el html es necesario agregar el atributo `data-clever` de la siguiente forma: `<select data-clever="{class: 'my-class', animation: false}">`, o desde JavaScript como se muestra abajo:
 
 ```js
-// Invocamos la clase Clever y modificamos sus opciones
+// Se crea una instacia de la clase Clever y se modifican sus opciones
 var selectVehicle = new Clever( document.getElementById('selectVehicle', {class: 'my-select'}) );
 ```
 
@@ -78,10 +78,16 @@ var selectVehicle = new Clever( document.getElementById('selectVehicle', {class:
 Option | Type | Default | Descripción
 ------ | ---- | ------- | -----------
 class | string | '' | Permite agregar una clase con el nombre que se desee.
-data | string | 'value' | Especifica de que atributo tomara _clever_ el valor, ejemplo: `<option value="DeLorean" car="DeLorean">DeLorean</option>` para esta estructura modificamos la opción para que tome el atributo `car` de la siguiente manera `var selectVehicle = new Clever( document.getElementById('selectVehicle', {data: 'car'}) );`.
+getData | string | 'value' | Especifica de que atributo tomara _clever_ el valor, ejemplo: `<option value="DeLorean" car="DeLorean">DeLorean</option>` para esta estructura modificamos la opción para que tome el atributo `car` de la siguiente manera `var selectVehicle = new Clever( document.getElementById('SelectVehicle', {data: 'car'}) );`.
 animation | boolean | true | Activa o desactiva las animaciones por defecto.
 linked | boolean | true | Liga la estructura HTML de clever con el `<select>`.
 changePosition | boolean | true | Cambia automaticamente la posición del _dropdown_ dependiendo de la posición del scroll.
+
+Method | Argument | Descripción
+------ | -------- | -----------
+onInit | | Se invoca antes de contruir Clever
+onFocus | | Se invoca al hacer `<select>`
+onChange | | Se invoca al cambio de opción 
 
 
 
