@@ -18,7 +18,7 @@ Clever es una clase creada con JavaScript para permitir la customización de las
 
 [https://https://github.com/lamchang/clever](https://https://github.com/lamchang/clever)
 
-#### Empezar
+##### Empezar
 
 Para empezar con el uso de clever siguie los siguientes pasos:
 
@@ -38,7 +38,7 @@ Para utilizar *clever* es necesario colocar el archivo *clever.min.js* antes del
 ```html
   ...
   ...
-  <!-- Agregamos clever.min.js al documento -->
+  <!-- Se agrega clever.min.js al documento -->
   <script src="js/clever.min.js"></script>
   <!-- El código que invoca a la clase clever debe ir después de que este sea declarado -->
 </body>
@@ -77,17 +77,21 @@ var selectVehicle = new Clever( document.getElementById('selectVehicle', {class:
 
 Option | Type | Default | Descripción
 ------ | ---- | ------- | -----------
-class | string | '' | Permite agregar una clase con el nombre que se desee.
+class | string | '' | Permite agregar una clase al objet Clever.
 getData | string | 'value' | Especifica de que atributo tomara _clever_ el valor, ejemplo: `<option value="DeLorean" car="DeLorean">DeLorean</option>` para esta estructura modificamos la opción para que tome el atributo `car` de la siguiente manera `var selectVehicle = new Clever( document.getElementById('SelectVehicle', {data: 'car'}) );`.
 animation | boolean | true | Activa o desactiva las animaciones por defecto.
 linked | boolean | true | Liga la estructura HTML de clever con el `<select>`.
-changePosition | boolean | true | Cambia automaticamente la posición del _dropdown_ dependiendo de la posición del scroll.
+dropPositionAuto | boolean | true | Cambia automaticamente la posición del _dropdown_ dependiendo de la posición del scroll.
+appendTo | DOM object | null | Define el objeto del DOM dónde se creará el dropdown.
 
 Method | Argument | Descripción
 ------ | -------- | -----------
-onInit | | Se invoca antes de contruir Clever
-onFocus | | Se invoca al hacer `<select>`
-onChange | | Se invoca al cambio de opción 
+`onInit` | function | Es invocado antes de la contrucción de la estructura `html` de Clever, se puede utilizar `this` para acceder a la clase.
+`onFocus` | function | Es invocado al desplegar las opciones del `select`, se puede utilizar `this` para acceder a la clase.
+`onChange` | function | Es invocado cuando se elige una opción diferente a la ya seleccionada, se puede utilizar `this` para acceder a la clase.
+`destroy` | | Destruye Clever.
+
+
 
 
 
