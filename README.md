@@ -24,7 +24,7 @@ Para empezar con el uso de clever siguie los siguientes pasos:
 
 ##### Incluir clever
 
-(Opcional) Si deseas tenes la aparencia por defecto de clever puedes agregar los estilos dentro de la etiqueta `<head>`:
+(Opcional) Si deseas tener la aparencia por defecto de clever puedes agregar el archivo `clever.min.css` dentro de la etiqueta `<head>`:
 
 ```html
   ...
@@ -40,7 +40,7 @@ Para utilizar *clever* es necesario colocar el archivo *clever.min.js* antes del
   ...
   <!-- Se agrega clever.min.js al documento -->
   <script src="js/clever.min.js"></script>
-  <!-- El código que invoca a la clase clever debe ir después de que este sea declarado -->
+  <!-- El código crea una instacia de la clase Clever debe ir después de que esta sea declarada -->
 </body>
 ```
 
@@ -56,20 +56,28 @@ Primero asegurate de que tu `<select>` tenga la siguiente estructura:
 </select>
 ```
 
-Invocamos clever tal como se muestra a continuación:
+Se instancia clever tal como se muestra a continuación:
 
 ```js
 // Se crea una instacia de la clase Clever
 var selectVehicle = new Clever( document.getElementById('selectVehicle') );
 ```
 
-y es posible modificar sus opciones:
-
-Para modificar las opciones desde el html es necesario agregar el atributo `data-clever` de la siguiente forma: `<select data-clever="{class: 'my-class', animation: false}">`, o desde JavaScript como se muestra abajo:
+y es posible modificar sus opciones desde el html agregando el atributo `data-clever` de la siguiente forma: 
+```js
+<select id="SelectVehicle" data-clever="{class: 'my-class', appenTo: document.body}">
+  ...
+</select>
+```
+o desde JavaScript como se muestra abajo:
 
 ```js
 // Se crea una instacia de la clase Clever y se modifican sus opciones
-var selectVehicle = new Clever( document.getElementById('selectVehicle', {class: 'my-select'}) );
+var selectVehicle = new Clever( document.getElementById('selectVehicle'), {
+    class: 'my-select',
+    appenTo: document.body
+  }
+);
 ```
 
 
