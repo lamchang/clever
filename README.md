@@ -18,7 +18,7 @@ Clever es una clase creada con JavaScript para permitir la customización de las
 
 [https://https://github.com/lamchang/clever](https://https://github.com/lamchang/clever)
 
-##### Empezar
+Empezar
 
 Archivos necesarios:
 1. clever.min.css (opcional)
@@ -84,6 +84,72 @@ var selectVehicle = new Clever( document.getElementById('selectVehicle'), {
 );
 ```
 
+### Uso de métodos
+
+Para ejecutar _scripts_ existen 3 métodos que serán de utilidad `onInit`, `onClick` y `onChange`.
+
+`onInit`. Se invoca después de que la estructura HTML de _Clever_ sea construida.
+
+```js
+// Uso de método "onInit"
+var selectVehicle = new Clever( document.getElementById('selectVehicle'), {
+    onInit: function(){
+
+      // Se invoca el método "toggleDropdown" para desplegar dropdown después construirse la estructura
+      this.toggleDropdown();
+
+    }
+  }
+);
+
+```
+
+`onClick`. Éste método es invocado al hacer click en el objeto `select` o cuando es invocado el método `toggleDropdown`, por lo que se ejecutara sin importar si el _dropdown_ esta deplegado o no.
+
+```js
+// Uso de método "onInit"
+var selectVehicle = new Clever( document.getElementById('selectVehicle'), {
+    onClick: function(){
+
+      // Si el valor de "selectVehicle" es igual a "true"...
+      if(this.focus == true) {
+        // ... Se imprime en la consola
+        console.log('El dropdown esta desplegado');
+      }
+      // ...en otro caso...
+      else {
+        // ... Se imprime en la consola
+        console.log('El dropdown no esta desplegado');
+      }
+
+    }
+  }
+);
+
+// Se imprimirá en consola 
+Si es igual a true: El dropdown esta desplegado
+Si es igual a false: El dropdown no esta desplegado
+
+```
+
+`onChange`. Es invocado cuando el valor del objeto `select` cambia.
+
+```js
+// Uso de método "onInit"
+var selectVehicle = new Clever( document.getElementById('selectVehicle'), {
+    onChange: function(){
+
+      // ... Se imprime en la consola
+      console.log('Cambiaste la opción por ' + this.value);
+
+    }
+  }
+);
+
+// Se imprimirá en consola 
+Cambiaste la opción por MillenniumFalcon
+
+```
 
 #### Settings
 
@@ -91,18 +157,17 @@ Option | Type | Default | Descripción
 ------ | ---- | ------- | -----------
 class | string | '' | Permite agregar una clase al objet Clever.
 getData | string | 'value' | Especifica de que atributo tomara _clever_ el valor, ejemplo: `<option value="DeLorean" car="DeLorean">DeLorean</option>` para esta estructura modificamos la opción para que tome el atributo `car` de la siguiente manera `var selectVehicle = new Clever( document.getElementById('SelectVehicle', {data: 'car'}) );`.
-animation | boolean | true | Activa o desactiva las animaciones por defecto.
 linked | boolean | true | Liga la estructura HTML de clever con el `<select>`.
 dropPositionAuto | boolean | true | Cambia automaticamente la posición del _dropdown_ dependiendo de la posición del scroll.
-appendTo | DOM object | null | Define el objeto del DOM dónde se creará el dropdown.
+appendTo | DOM object | null | Define el objeto del DOM dónde se creará el _dropdown_.
 
 Method | Argument | Descripción
 ------ | -------- | -----------
-`onInit` | function | Es invocado antes de la contrucción de la estructura `html` de Clever, se puede utilizar `this` para acceder a la clase.
-`onFocus` | function | Es invocado al desplegar las opciones del `select`, se puede utilizar `this` para acceder a la clase.
+`onInit` | function | Es invocado después de la contrucción de la estructura `HTML` de _Clever_, se puede utilizar `this` para acceder a la clase.
+`onClick` | function | Es invocado al desplegar las opciones del `select`, se puede utilizar `this` para acceder a la clase.
 `onChange` | function | Es invocado cuando se elige una opción diferente a la ya seleccionada, se puede utilizar `this` para acceder a la clase.
+`toggleDropdown` | | Muestra u oculta el _dropdown_.
 `destroy` | | Destruye Clever.
-
 
 
 

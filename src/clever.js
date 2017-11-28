@@ -25,7 +25,7 @@
                 // Methods
                 appendTo: null,
                 onInit: ()=>{},
-                onFocus: ()=>{},
+                onClick: ()=>{},
                 onChange: ()=>{}
             };
 
@@ -261,10 +261,10 @@
 
             if(this.DOM.element.select.classList.contains('clever--focus')) {
                 this.focus = true;
-                this.options.onFocus.call(this);
+                this.options.onClick.call(this);
             } else {
                 this.focus = false;
-                this.options.onFocus.call(this);
+                this.options.onClick.call(this);
             }
         }
 
@@ -280,8 +280,8 @@
 
                 // Changes focus value to false
                 this.focus = false;
-                // Invoke "onFocus()" method
-                this.options.onFocus.call(this);
+                // Invoke "onClick()" method
+                this.options.onClick.call(this);
 
             } else {
 

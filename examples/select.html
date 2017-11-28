@@ -88,14 +88,14 @@
 
         // Declare new Clever
         var cleverVehicle = new Clever(selectVehicle, {
-            // Clever init()
+            // Clever onInit()
             onInit: function() {
                 var elInit = document.querySelector('.js-write-init');
                     elInit.innerHTML = 'Init: ' + this.id + ', value: ' + this.value;
             },
 
-            // Clever focus()
-            onFocus: function() {
+            // Clever onClick()
+            onClick: function() {
                 var elFocus = document.querySelector('.js-write-focus');
 
                 if(this.focus === true) {
@@ -103,9 +103,11 @@
                 } else {
                     elFocus.innerHTML = '';
                 }
+
+                console.log(this.value);
             },
 
-            // Clever focus()
+            // Clever onChange()
             onChange: function(el) {
                 var elChange = document.querySelector('.js-write-change');
                     elChange.innerHTML = 'change' + this.id + ', value: ' + this.value;
