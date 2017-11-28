@@ -158,7 +158,7 @@ Option | Type | Default | Descripción
 class | string | '' | Permite agregar una clase al objet Clever.
 getData | string | 'value' | Especifica de que atributo tomara _clever_ el valor, ejemplo: `<option value="DeLorean" car="DeLorean">DeLorean</option>` para esta estructura modificamos la opción para que tome el atributo `car` de la siguiente manera `var selectVehicle = new Clever( document.getElementById('SelectVehicle', {data: 'car'}) );`.
 linked | boolean | true | Liga la estructura HTML de clever con el `<select>`.
-dropPositionAuto | boolean | true | Cambia automaticamente la posición del _dropdown_ dependiendo de la posición del scroll.
+dropPositionAuto | boolean | true | Cambia automáticamente la posición del _dropdown_ dependiendo de la posición del scroll.
 appendTo | DOM object | null | Define el objeto del DOM dónde se creará el _dropdown_.
 
 Method | Argument | Descripción
@@ -169,6 +169,13 @@ Method | Argument | Descripción
 `toggleDropdown` | | Muestra u oculta el _dropdown_.
 `destroy` | | Destruye Clever.
 
-
+Data | Argument | Descripción
+------ | -------- | -----------
+`id` | classInstance.id | Regresa el valor del `id` generado automáticamente por _Clever_.
+`value` | classInstance.value | Regresa el valor del objeto _select_.
+`focus` | classInstance.focus | Regresa `true` si el _dropdown_ esta desplegado  o regresa `false` si el _dropdown_ no esta desplegado.
+`index` | classInstance.index | Regresa el `index` de la instancia _Clever_.
+`DOM` | classInstance.DOM | Regresa los objetos creados en el DOM por _Clever_.
+`options` | classInstance.options | Regresa las opciones de _Clever_.
 
 
