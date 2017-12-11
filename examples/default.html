@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Clever select</title>
+
+    <!-- VIEWPORT -->
+    <meta name="viewport" content="width=device-width, initial-scale=1,  maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <!-- MOBILE FORMAT -->
+    <meta name="format-detection" content="telephone=no">
+    <!-- DESCRIPTION & KEYWORDS -->
+    <meta name="description" content="Breve descripción de lo que los usuarios encontrarán en este documento, deberá ser única max 156 caracteres">
+    <meta name="keywords" content="" />
+    <!-- AUTHOR & SITEMAP -->
+    <link rel="author" type="text/plain" href="humans.txt">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="sitemap.xml">
+    <!-- ICON -->
+    <link rel="shortcut icon" type="image/x-icon" href="../images/favicon1.ico">
+    <link rel="shortcut icon" type="image/png" href="../images/favicon.png">
+    <link rel="apple-touch-icon" href="../images/favicon.png">
+    <!-- STYLES -->
+    <link rel="stylesheet" type="text/css" href="../assets/css/styles.css">
+</head>
+
+<body>
+
+    <section class="intro">
+        <div class="intro__header">
+            <h1>Clever: Default</h1>
+        </div>
+
+        <div class="intro__body">
+            <div class="select-group">
+                <label class="label" for="Vehicle">Vehicle</label>
+                <!-- Use the "<select>" tag for instantiate clever -->
+                <select id="Vehicle">
+                    <option value="DeLorean">DeLorean</option>
+                    <option value="MillenniumFalcon"  selected="">Millennium Falcon</option>
+                    <option value="Carreta">Carreta</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add "clever.js" file -->
+    <script src="../src/clever.js"></script>
+    <script>
+        // Get element by id
+        var selectVehicle = document.getElementById('Vehicle');
+        // Instantiante clever
+        var cleverVehicle = new Clever(selectVehicle);
+    </script>
+
+</body>
+</html>

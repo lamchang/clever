@@ -37,12 +37,24 @@
 // Intro
 .intro {
     display: grid;
-    grid-template-columns: auto 695px 695px auto;
+    grid-template-columns: repeat(8, 1fr);
     grid-column-gap: 0;
-    grid-template-rows: auto;
-    grid-template-areas: ". code example .";
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-areas:
+    "empty empty empty empty empty empty empty empty"
+    ". . header header header header . ."
+    ". . . body body . . ."
+    ". . . . . . . .";
     width: 100vw;
-    height: auto;
+    height: 100vh;
+}
+
+.intro__header {
+    grid-area: header;
+}
+
+.intro__body {
+    grid-area: body;
 }
 
 // Callbacks
