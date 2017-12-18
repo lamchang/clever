@@ -196,6 +196,11 @@
 
             this.DOM.element.select.dropdown.appendChild (this.DOM.element.select.list);
 
+            // Event for "field"
+            this.DOM.element.select.field,addEventListener('click', function(event){
+                event.preventDefault();
+            });
+
             // Event for close dropdown
             document.addEventListener('click', function() {
                 clever.closeDropdown.call(clever);

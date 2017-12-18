@@ -1,0 +1,43 @@
+
+.intro {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-column-gap: 0;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-areas:
+    ". empty empty empty empty ."
+    ". header header header header ."
+    ". body body body body ."
+    ". . . . . .";
+    width: 100vw;
+    height: 100vh;
+}
+
+.intro__header {
+    grid-area: header;
+    align-self: end;
+
+    h1 {
+        margin: 0;
+        font-size: 3.77vmax;
+    }
+}
+
+.intro__body {
+    grid-area: body;
+}
+
+// Example "default"
+.example--default {
+    background: linear-gradient(blue, cyan);
+
+    .intro__header {
+        color: white;
+    }
+
+    .select-group {
+        .label {
+            color: white;
+        }
+    }
+}
